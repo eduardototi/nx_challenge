@@ -3,12 +3,12 @@ class LoansController < ApplicationController
 
   def create
 		@loan = Loan.new(value: params[:value],
-								taxa: params[:taxa],
-								parcelas: params[:parcelas] || 12)
+								     taxa: params[:taxa],
+								     parcelas: params[:parcelas] || 12)
     if @loan.save
       render json: { loan: { id: @loan.id } }
     else
-		render :json => { :errors => @loan.errors.full_messages }
+		  render :json => { :errors => @loan.errors.full_messages }
     end
   end
 

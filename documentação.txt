@@ -1,0 +1,50 @@
+Documentação:
+
+Iniciar o servidor local: 
+
+rails server
+
+Request para criar novas loans:
+
+POST: http://localhost:3000/loans/
+Envio obrigatorio como parametro :
+value: valor númerico
+taxa: valor númerico
+
+Envio opicional:
+parcelas: valor inteiro 
+obs.: Caso o parametro parcelas não seja enviado o sistema automaticamente assume o valor de 12 parcelas.
+
+Resultado esperado: 
+
+{
+    "loan": {
+        "id": id da nova loan
+    }
+}
+
+Após o envio da requisição o model de Loan irá acionar um hoocker com o serviço set_pmt_to_loan_service este servicço é responsável por fazer o calculo da PMT.
+
+Requeste para retornar dados do banco de dados:
+
+GET: localhost:3000/loans/id
+
+Substituir id pelo número do ID da Loan desejada.
+
+Resultado esperado:
+
+{
+    "loan": {
+        "id": id da loan,
+        "pmt": valor da pmt
+    }
+}
+
+==============================================================================
+
+Observações:
+
+Ao meu entender para efetuar o calculo da PMT é necessário o número de parcelas para o financiamente, a forma que encontrei para resolver foi usar 
+hard code com default de 12 parcelas e a opção de enviar junto com o POST o número de parcelas. 
+
+
